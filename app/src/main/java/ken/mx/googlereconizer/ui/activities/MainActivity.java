@@ -3,6 +3,7 @@ package ken.mx.googlereconizer.ui.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
@@ -37,6 +38,7 @@ import ken.mx.googlereconizer.model.BodyImage;
 import ken.mx.googlereconizer.model.Face;
 import ken.mx.googlereconizer.model.ResponseReconizing;
 import ken.mx.googlereconizer.ui.adapter.FacesAdapter;
+import ken.mx.googlereconizer.ui.adapter.ProfileAdapter;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewFaces;
     private FacesAdapter facesAdapter;
-    private List<Face> faceAdapterList = new ArrayList<>();
+    private List<Face> faceAdapterList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -270,11 +272,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setupRecycler() {
+        faceAdapterList = new ArrayList<>();
         recyclerViewFaces = (RecyclerView) findViewById(R.id.recycler_faces);
         recyclerViewFaces.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerViewFaces.setHasFixedSize(true);
         facesAdapter = new FacesAdapter(faceAdapterList);
         recyclerViewFaces.setAdapter(facesAdapter);
+        Face face = new Face("12","sdfds","sdfdsf");
+        Face face1 = new Face("12","sdfds","sdfdsf");
+        Face face2= new Face("12","sdfds","sdfdsf");
+        Face face3 = new Face("12","sdfds","sdfdsf");
+        Face face4 = new Face("12","sdfds","sdfdsf");
+        Face face5 = new Face("12","sdfds","sdfdsf");
+        Face face6 = new Face("12","sdfds","sdfdsf");
+        faceAdapterList.add(face);
+        faceAdapterList.add(face1);
+        faceAdapterList.add(face2);
+        faceAdapterList.add(face3);
+        faceAdapterList.add(face4);
+        faceAdapterList.add(face5);
+        faceAdapterList.add(face6);
+        facesAdapter.notifyDataSetChanged();
+        facesAdapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("Perfil activity", "Pulsado el elemento " + recyclerViewFaces.getChildAdapterPosition(v));
+                Face face = faceAdapterList.get(recyclerViewFaces.getChildAdapterPosition(v));
+                Intent intent = new Intent(MainActivity.this,FaceProfileActivity.class);
+                intent.putExtra("Algo",face.getId());
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
     }

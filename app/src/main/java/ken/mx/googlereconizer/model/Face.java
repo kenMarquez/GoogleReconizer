@@ -10,10 +10,16 @@ public class Face {
     private String score;
 
     private String url;
-
+    private String id;
     public Face(String score, String url) {
         this.score = score;
         this.url = url;
+    }
+
+    public Face(String score, String url, String id) {
+        this.score = score;
+        this.url = url;
+        this.id = id;
     }
 
     public String getScore() {
@@ -30,5 +36,22 @@ public class Face {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Face{" +
+                "score='" + score + '\'' +
+                ", url='" + url + '\'' +
+                ", id='" + id + '\'' +
+                '}';
     }
 }
