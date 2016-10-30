@@ -188,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
         final RoundCornerProgressBar progressBarDisgusto = (RoundCornerProgressBar) dialog.findViewById(R.id.progress_disgusto);
         final RoundCornerProgressBar progressBarNeutral = (RoundCornerProgressBar) dialog.findViewById(R.id.progress_neutral);
 
+
         TextView tvFelicidad = (TextView) dialog.findViewById(R.id.tv_felicidad);
         TextView tvTristeza = (TextView) dialog.findViewById(R.id.tv_tristeza);
         TextView tvDesprecio = (TextView) dialog.findViewById(R.id.tv_desprecio);
@@ -292,15 +293,44 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     public void setupRecycler() {
+        faceAdapterList = new ArrayList<>();
         recyclerViewFaces = (RecyclerView) findViewById(R.id.recycler_faces);
         recyclerViewFaces.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerViewFaces.setHasFixedSize(true);
         facesAdapter = new FacesAdapter(faceAdapterList);
         recyclerViewFaces.setAdapter(facesAdapter);
+        Face face = new Face("12", "sdfds", "sdfdsf", 0);
+        Face face1 = new Face("12", "sdfds", "sdfdsf", 1);
+        Face face2 = new Face("12", "sdfds", "sdfdsf", 0);
+        Face face3 = new Face("12", "sdfds", "sdfdsf", 1);
+        Face face4 = new Face("12", "sdfds", "sdfdsf", 2);
+        Face face5 = new Face("12", "sdfds", "sdfdsf", 2);
+        Face face6 = new Face("12", "sdfds", "sdfdsf", 1);
+        faceAdapterList.add(face);
+        faceAdapterList.add(face1);
+        faceAdapterList.add(face2);
+        faceAdapterList.add(face3);
+        faceAdapterList.add(face4);
+        faceAdapterList.add(face5);
+        faceAdapterList.add(face6);
+        facesAdapter.notifyDataSetChanged();
+        facesAdapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("Perfil activity", "Pulsado el elemento " + recyclerViewFaces.getChildAdapterPosition(v));
+                Face face = faceAdapterList.get(recyclerViewFaces.getChildAdapterPosition(v));
+                Intent intent = new Intent(MainActivity.this, FaceProfileActivity.class);
+                intent.putExtra("Algo", face.getId());
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
     }
+
 
     public void log(String content) {
         Log.i("myLog", content);

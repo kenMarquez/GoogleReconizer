@@ -21,14 +21,15 @@ public class FaceProfileActivity extends AppCompatActivity {
     private int[] mEndColors = new int[MODEL_COUNT];
     private Bundle bundle;
     private String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_face_profile);
-        arcProgressStackView=(ArcProgressStackView)findViewById(R.id.apsv_presentation);
+        arcProgressStackView = (ArcProgressStackView) findViewById(R.id.apsv_presentation);
         setArcProgressStackViewValues();
         bundle = getIntent().getExtras();
-        id=bundle.getString("Algo");
+        id = bundle.getString("Algo");
     }
 
     @Override
@@ -40,7 +41,7 @@ public class FaceProfileActivity extends AppCompatActivity {
         finish();
     }
 
-    public void setArcProgressStackViewValues(){
+    public void setArcProgressStackViewValues() {
 
         // Get colors
         final String[] startColors = getResources().getStringArray(R.array.devlight);
@@ -54,23 +55,24 @@ public class FaceProfileActivity extends AppCompatActivity {
         float maxX = 100.0f;
 
         Random rand = new Random();
-        float final1 = rand.nextFloat() * (maxX - minX) + minX;
-        float final2 = rand.nextFloat() * (maxX - minX) + minX;
-        float final3 = rand.nextFloat() * (maxX - minX) + minX;
-        float final4 = rand.nextFloat() * (maxX - minX) + minX;
-        arcProgressStackView.setIsRounded(true);
-        List<ArcProgressStackView.Model> models = new ArrayList<>();
-        models.add(new ArcProgressStackView.Model("Enojo",final1, Color.parseColor(bgColors[0]), mStartColors[3]));
-        models.add(new ArcProgressStackView.Model("Desprecio", final2, Color.parseColor(bgColors[1]), mStartColors[2]));
-        models.add(new ArcProgressStackView.Model("Neutral", final3, Color.parseColor(bgColors[2]), mStartColors[1]));
-        models.add(new ArcProgressStackView.Model("Felicidad", final4, Color.parseColor(bgColors[3]), mStartColors[0]));
-        arcProgressStackView.setModels(models);
-        for (ArcProgressStackView.Model model : arcProgressStackView.getModels());
-        arcProgressStackView.animateProgress();
-
-
-
-
+        final float final1 = rand.nextFloat() * (maxX - minX) + minX;
+        final float final2 = rand.nextFloat() * (maxX - minX) + minX;
+        final float final3 = rand.nextFloat() * (maxX - minX) + minX;
+        final float final4 = rand.nextFloat() * (maxX - minX) + minX;
+        arcProgressStackView.post(new Runnable() {
+            @Override
+            public void run() {
+                arcProgressStackView.setIsRounded(true);
+                List<ArcProgressStackView.Model> models = new ArrayList<>();
+                models.add(new ArcProgressStackView.Model("Enojo", final1, Color.parseColor(bgColors[0]), mStartColors[3]));
+                models.add(new ArcProgressStackView.Model("Desprecio", final2, Color.parseColor(bgColors[1]), mStartColors[2]));
+                models.add(new ArcProgressStackView.Model("Neutral", final3, Color.parseColor(bgColors[2]), mStartColors[1]));
+                models.add(new ArcProgressStackView.Model("Felicidad", final4, Color.parseColor(bgColors[3]), mStartColors[0]));
+                arcProgressStackView.setModels(models);
+                for (ArcProgressStackView.Model model : arcProgressStackView.getModels()) ;
+                arcProgressStackView.animateProgress();
+            }
+        });
 
 
     }
