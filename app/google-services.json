@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "703284638583",
+    "firebase_url": "https://feelme-b1f10.firebaseio.com",
+    "project_id": "feelme-b1f10",
+    "storage_bucket": "feelme-b1f10.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:703284638583:android:be6e4d20d786d7bb",
+        "android_client_info": {
+          "package_name": "ken.mx.googlereconizer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "703284638583-sscgoi0q96cjvlld2r703qs4nrge8c1m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH93Y7VbkVbawdX-oaqLWJ8XPRsbap9To"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

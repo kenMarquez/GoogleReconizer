@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:paddingBottom="15dp"
+    android:paddingLeft="18dp"
+    android:paddingRight="18dp"
+    android:paddingTop="15dp">
+
+    <LinearLayout
+        android:id="@+id/reveal_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#66000000"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="20dp">
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/circle_img"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/person"
+            app:civ_border_color="#EEEEEE"
+            app:civ_border_width="4dp"
+            app:civ_shadow="true"
+            app:civ_shadow_color="#8BC34A"
+            app:civ_shadow_radius="10" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:text="Felicidad"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_felicidad"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="70%"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/progress_felicidad"
+                android:layout_width="match_parent"
+                android:layout_height="13dp"
+                app:rcBackgroundColor="#ccc"
+                app:rcBackgroundPadding="3dp"
+                app:rcMax="1000"
+                app:rcProgress="0"
+                app:rcProgressColor="@color/colorPrimary"
+                app:rcRadius="3dp"
+                app:rcSecondaryProgress="4"
+                app:rcSecondaryProgressColor="@color/colorPrimaryDark" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:text="Tristeza"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_tristeza"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="70%"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/progress_tristeza"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                app:rcBackgroundColor="#ccc"
+                app:rcBackgroundPadding="3dp"
+                app:rcMax="1000"
+                app:rcProgress="0"
+                app:rcProgressColor="@color/colorPrimary"
+                app:rcRadius="3dp"
+                app:rcSecondaryProgress="4"
+                app:rcSecondaryProgressColor="@color/colorPrimaryDark" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:text="Desprecio"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_desprecio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="70%"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/progress_desprecio"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                app:rcBackgroundColor="#ccc"
+                app:rcBackgroundPadding="3dp"
+                app:rcMax="1000"
+                app:rcProgress="0"
+                app:rcProgressColor="@color/colorPrimary"
+                app:rcRadius="3dp"
+                app:rcSecondaryProgress="4"
+                app:rcSecondaryProgressColor="@color/colorPrimaryDark" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:text="Disgusto"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_disgusto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="70%"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/progress_disgusto"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                app:rcBackgroundColor="#ccc"
+                app:rcBackgroundPadding="3dp"
+                app:rcMax="1000"
+                app:rcProgress="0"
+                app:rcProgressColor="@color/colorPrimary"
+                app:rcRadius="3dp"
+                app:rcSecondaryProgress="4"
+                app:rcSecondaryProgressColor="@color/colorPrimaryDark" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:text="Neutral"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_neutral"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="70%"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/progress_neutral"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                app:rcBackgroundColor="#ccc"
+                app:rcBackgroundPadding="3dp"
+                app:rcMax="1000"
+                app:rcProgress="0"
+                app:rcProgressColor="@color/colorPrimary"
+                app:rcRadius="3dp"
+                app:rcSecondaryProgress="4"
+                app:rcSecondaryProgressColor="@color/colorPrimaryDark" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="Cancel"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="Save"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
