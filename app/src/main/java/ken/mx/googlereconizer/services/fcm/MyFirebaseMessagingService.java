@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -56,11 +57,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         log("From: " + remoteMessage.getData());
 //        Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
         String data = remoteMessage.getData().get("message");
+        String url = remoteMessage.getData().get("photo");
+        log("photo: " + url);
         Map<String, String> data1 = remoteMessage.getData();
         String aps = data1.get("aps");
         JSONObject jsonData = null;
 
-        sendNotification("hola");
+        Intent finish = new Intent(MainActivity.NEW_PHOTO);
+        finish.putExtra("url", url);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(finish);
+
+        sendNotification("");
 //        try {
 //            jsonData = new JSONObject(aps);
 //        } catch (JSONException e) {
@@ -85,7 +92,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Kanis")
+                .setContentTitle("Feelme")
                 .setContentText(messageBody)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)

@@ -2,9 +2,15 @@ package ken.mx.googlereconizer.ui.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.os.CountDownTimer;
+import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +24,7 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.bumptech.glide.Glide;
@@ -48,9 +55,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String NEW_PHOTO = "NEW_PHOTO";
     private RecyclerView recyclerViewFaces;
     private FacesAdapter facesAdapter;
     private List<Face> faceAdapterList = new ArrayList<>();
+    private LocalBroadcastManager bManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +67,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         initViews();
 
+        bManager = LocalBroadcastManager.getInstance(this);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(NEW_PHOTO);
+        bManager.registerReceiver(bReceiver, intentFilter);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        doRequest("https://i.vimeocdn.com/portrait/4900311_300x300");
+
     }
 
     private void initViews() {
@@ -81,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     public void doRequest(final String url) {
 
 
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
+        final HttpLoggingInterceptor logging = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
                 .addInterceptor(logging);
@@ -99,7 +112,17 @@ public class MainActivity extends AppCompatActivity {
         apiService.getFace(new BodyImage(url)).enqueue(new Callback<List<ResponseReconizing>>() {
             @Override
             public void onResponse(Call<List<ResponseReconizing>> call, Response<List<ResponseReconizing>> response) {
-                showDialog(response.body().get(0), url);
+                if (response.body() != null) {
+                    log(response.body().toString());
+                    if (response.body().size() > 0) {
+                        showDialog(response.body().get(0), url);
+                    } else {
+                        Toast.makeText(MainActivity.this, "No se encontraron caracteristicas", Toast.LENGTH_LONG).show();
+                    }
+
+                } else {
+                    log("no entro");
+                }
             }
 
             @Override
@@ -282,6 +305,20 @@ public class MainActivity extends AppCompatActivity {
     public void log(String content) {
         Log.i("myLog", content);
     }
+
+    private BroadcastReceiver bReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(NEW_PHOTO)) {
+//                String serviceJsonString = intent.getStringExtra("stati");
+                String url = intent.getStringExtra("url");
+                //Do something with the string
+                //finish
+                log(url);
+                doRequest(url);
+            }
+        }
+    };
 
 
 }
