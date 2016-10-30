@@ -10,10 +10,32 @@ public class Face {
     private String score;
 
     private String url;
-
+    private String id;
+    private int potencial;
     public Face(String score, String url) {
         this.score = score;
         this.url = url;
+    }
+
+    public Face(String score, String url, String id) {
+        this.score = score;
+        this.url = url;
+        this.id = id;
+    }
+
+    public Face(String score, String url, String id, int potencial) {
+        this.score = score;
+        this.url = url;
+        this.id = id;
+        this.potencial = potencial;
+    }
+
+    public int getPotencial() {
+        return potencial;
+    }
+
+    public void setPotencial(int potencial) {
+        this.potencial = potencial;
     }
 
     public String getScore() {
@@ -30,5 +52,22 @@ public class Face {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Face{" +
+                "score='" + score + '\'' +
+                ", url='" + url + '\'' +
+                ", id='" + id + '\'' +
+                '}';
     }
 }
