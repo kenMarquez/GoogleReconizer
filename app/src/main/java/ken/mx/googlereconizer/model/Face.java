@@ -11,6 +11,7 @@ public class Face {
 
     private String url;
     private String id;
+    private int potencial;
     public Face(String score, String url) {
         this.score = score;
         this.url = url;
@@ -20,6 +21,21 @@ public class Face {
         this.score = score;
         this.url = url;
         this.id = id;
+    }
+
+    public Face(String score, String url, String id, int potencial) {
+        this.score = score;
+        this.url = url;
+        this.id = id;
+        this.potencial = potencial;
+    }
+
+    public int getPotencial() {
+        return potencial;
+    }
+
+    public void setPotencial(int potencial) {
+        this.potencial = potencial;
     }
 
     public String getScore() {

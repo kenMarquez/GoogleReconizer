@@ -6,6 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -53,7 +56,7 @@ public class FacesAdapter extends RecyclerView.Adapter<FacesAdapter.ViewHolderAd
 //        Face face = faceList.get(position);
 //        holder.bindTrack(face);
         Face item = faceList.get(position);
-        holder.bindTrack();
+        holder.bindTrack(item);
     }
 
     @Override
@@ -63,16 +66,23 @@ public class FacesAdapter extends RecyclerView.Adapter<FacesAdapter.ViewHolderAd
 
     public class ViewHolderAdapter extends RecyclerView.ViewHolder {
 
-
+        TextView tv_potemcial;
         private View rootView;
         public ViewHolderAdapter(View itemView) {
             super(itemView);
             rootView=itemView;
+            tv_potemcial=(TextView)itemView.findViewById(R.id.tv_potencial);
         }
 
-        public void bindTrack() {
-
+        public void bindTrack(Face face) {
             rootView.setOnClickListener(FacesAdapter.this);
+            if (face.getPotencial()==0){
+                tv_potemcial.setText("Potencial");
+            }else if(face.getPotencial()==1){
+                tv_potemcial.setText("No potencial");
+            }else if (face.getPotencial()==2){
+                tv_potemcial.setText("Neutro");
+            }
 
         }
 
