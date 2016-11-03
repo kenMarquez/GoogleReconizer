@@ -12,6 +12,12 @@ public class Face {
     private String url;
     private String id;
     private int potencial;
+
+    public Face ()
+    {
+
+    }
+
     public Face(String score, String url) {
         this.score = score;
         this.url = url;

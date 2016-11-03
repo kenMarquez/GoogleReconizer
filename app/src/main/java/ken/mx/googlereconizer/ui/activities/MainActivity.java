@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     private FacesAdapter facesAdapter;
     private List<Face> faceAdapterList = new ArrayList<>();
     private LocalBroadcastManager bManager;
+    Face face = new Face();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void showDialog(ResponseReconizing responseReconizing, String url) {
+    public void showDialog(ResponseReconizing responseReconizing, final String url) {
 
         final View dialogView = View.inflate(MainActivity.this, R.layout.dialog_reveal, null);
 
@@ -163,6 +164,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 revealShow(dialogView, false, dialog);
+                //TODO guardar datos de la persona y actualizar el recyclerview
+                face.setPotencial(0);
+                face.setScore("asdfg");
+                face.setId("asdfg");
+                face.setUrl(url);
+
+                faceAdapterList.add(face);
+                facesAdapter.notifyDataSetChanged();
             }
         });
 
@@ -301,21 +310,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewFaces.setHasFixedSize(true);
         facesAdapter = new FacesAdapter(faceAdapterList);
         recyclerViewFaces.setAdapter(facesAdapter);
-        Face face = new Face("12", "sdfds", "sdfdsf", 0);
-        Face face1 = new Face("12", "sdfds", "sdfdsf", 1);
+
+        /*Face face1 = new Face("12", "sdfds", "sdfdsf", 1);
         Face face2 = new Face("12", "sdfds", "sdfdsf", 0);
         Face face3 = new Face("12", "sdfds", "sdfdsf", 1);
         Face face4 = new Face("12", "sdfds", "sdfdsf", 2);
         Face face5 = new Face("12", "sdfds", "sdfdsf", 2);
-        Face face6 = new Face("12", "sdfds", "sdfdsf", 1);
-        faceAdapterList.add(face);
-        faceAdapterList.add(face1);
-        faceAdapterList.add(face2);
-        faceAdapterList.add(face3);
-        faceAdapterList.add(face4);
-        faceAdapterList.add(face5);
-        faceAdapterList.add(face6);
-        facesAdapter.notifyDataSetChanged();
+        Face face6 = new Face("12", "sdfds", "sdfdsf", 1);*/
+
         facesAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

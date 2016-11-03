@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.mikhaellopez.circularimageview.CircularImageView;
+
 import org.w3c.dom.Text;
 
 import java.util.List;
@@ -67,15 +70,18 @@ public class FacesAdapter extends RecyclerView.Adapter<FacesAdapter.ViewHolderAd
     public class ViewHolderAdapter extends RecyclerView.ViewHolder {
 
         TextView tv_potemcial;
+        CircularImageView iv_imagen;
         private View rootView;
         public ViewHolderAdapter(View itemView) {
             super(itemView);
             rootView=itemView;
             tv_potemcial=(TextView)itemView.findViewById(R.id.tv_potencial);
+            iv_imagen=(CircularImageView)itemView.findViewById(R.id.iv_face);
         }
 
         public void bindTrack(Face face) {
             rootView.setOnClickListener(FacesAdapter.this);
+            Glide.with(itemView.getContext()).load(face.getUrl()).into(iv_imagen);
             if (face.getPotencial()==0){
                 tv_potemcial.setText("Potencial");
             }else if(face.getPotencial()==1){
