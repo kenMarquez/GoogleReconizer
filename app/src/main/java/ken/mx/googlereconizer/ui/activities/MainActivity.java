@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private FacesAdapter facesAdapter;
     private List<Face> faceAdapterList = new ArrayList<>();
     private LocalBroadcastManager bManager;
+    static String idPass;
     Face face;
     Realm realm;
 
@@ -379,6 +380,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, FaceProfileActivity.class);
                 Log.i("Perfil activity", "ID "+face.getId());
                 intent.putExtra("Algo", face.getId());
+                idPass=""+face.getId();
                 startActivity(intent);
                 finish();
             }

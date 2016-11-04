@@ -27,6 +27,7 @@ public class FaceProfileActivity extends AppCompatActivity {
     private int[] mEndColors = new int[MODEL_COUNT];
     private Bundle bundle;
     private String id;
+    String idPass = MainActivity.idPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,7 @@ public class FaceProfileActivity extends AppCompatActivity {
 
         Realm realm = Realm.getDefaultInstance();
         //DatosFace resultado = realm.where(DatosFace.class).equalTo("idQuery", id).findFirst();
-        RealmResults<DatosFace> resultado = realm.where(DatosFace.class).equalTo("idQuery", id).findAll();
+        RealmResults<DatosFace> resultado = realm.where(DatosFace.class).equalTo("idQuery", idPass).findAll();
         double anger=0, disgust=0, neutral=0, hapiness=0, sadness=0;
         for (int i = 0; i < resultado.size(); i++)
         {
