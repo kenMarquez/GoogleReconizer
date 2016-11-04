@@ -1,12 +1,16 @@
 package ken.mx.googlereconizer.model;
 
-import com.google.gson.annotations.SerializedName;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
- * Created by Ken on 30/10/16.
+ * Created by Tony on 03/11/2016.
  */
-public class Face {
+
+public class DatosFace extends RealmObject {
+    @PrimaryKey
     private int id;
+    private String idQuery; //Lo siento por poner esto, pero al hacer query me dice que tiene que ser String
     private int potencial;
     private String url;
     private double happiness;
@@ -15,17 +19,12 @@ public class Face {
     private double disgust;
     private double neutral;
 
-    public Face(){}
+    public String getIdQuery() {
+        return idQuery;
+    }
 
-    public Face(int id, int potencial, String url, double happiness, double sadness, double anger, double disgust, double neutral) {
-        this.id = id;
-        this.potencial = potencial;
-        this.url = url;
-        this.happiness = happiness;
-        this.sadness = sadness;
-        this.anger = anger;
-        this.disgust = disgust;
-        this.neutral = neutral;
+    public void setIdQuery(String idQuery) {
+        this.idQuery = idQuery;
     }
 
     public int getId() {
@@ -90,19 +89,5 @@ public class Face {
 
     public void setNeutral(double neutral) {
         this.neutral = neutral;
-    }
-
-    @Override
-    public String toString() {
-        return "Face{" +
-                "id=" + id +
-                ", potencial=" + potencial +
-                ", url='" + url + '\'' +
-                ", happiness=" + happiness +
-                ", sadness=" + sadness +
-                ", anger=" + anger +
-                ", disgust=" + disgust +
-                ", neutral=" + neutral +
-                '}';
     }
 }

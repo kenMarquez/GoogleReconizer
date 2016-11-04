@@ -38,9 +38,13 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 import ken.mx.googlereconizer.ApiService;
 import ken.mx.googlereconizer.R;
 import ken.mx.googlereconizer.model.BodyImage;
+import ken.mx.googlereconizer.model.DatosFace;
 import ken.mx.googlereconizer.model.Face;
 import ken.mx.googlereconizer.model.ResponseReconizing;
 import ken.mx.googlereconizer.ui.adapter.FacesAdapter;
@@ -60,12 +64,22 @@ public class MainActivity extends AppCompatActivity {
     private FacesAdapter facesAdapter;
     private List<Face> faceAdapterList = new ArrayList<>();
     private LocalBroadcastManager bManager;
-    Face face = new Face();
+    Face face;
+    Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this)
+                .name(Realm.DEFAULT_REALM_NAME)
+                .schemaVersion(0)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(realmConfiguration);
+
+
         initViews();
 
         bManager = LocalBroadcastManager.getInstance(this);
@@ -135,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void showDialog(ResponseReconizing responseReconizing, final String url) {
+    public void showDialog(final ResponseReconizing responseReconizing, final String url) {
 
         final View dialogView = View.inflate(MainActivity.this, R.layout.dialog_reveal, null);
 
@@ -165,10 +179,32 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 revealShow(dialogView, false, dialog);
                 //TODO guardar datos de la persona y actualizar el recyclerview
+
+                realm = Realm.getDefaultInstance();
+                realm.beginTransaction();
+                DatosFace datos = realm.createObject(DatosFace.class);
+                int facid = realm.where(DatosFace.class).max("id").intValue()+1; //Se supone que así se hace autoincrementable
+                datos.setId(facid);
+                datos.setIdQuery(""+facid);
+                datos.setPotencial(0);
+                datos.setUrl(url);
+                datos.setHappiness(responseReconizing.getScores().getHappiness());
+                datos.setSadness(responseReconizing.getScores().getHappiness());
+                datos.setAnger(responseReconizing.getScores().getAnger());
+                datos.setDisgust(responseReconizing.getScores().getDisgust());
+                datos.setNeutral(responseReconizing.getScores().getNeutral());
+                Log.i("ID insert", "ID "+facid);
+                realm.commitTransaction();
+
+                face = new Face();
                 face.setPotencial(0);
-                face.setScore("asdfg");
-                face.setId("asdfg");
+                face.setId(0);
                 face.setUrl(url);
+                face.setHappiness(responseReconizing.getScores().getHappiness());
+                face.setSadness(responseReconizing.getScores().getHappiness());
+                face.setAnger(responseReconizing.getScores().getAnger());
+                face.setDisgust(responseReconizing.getScores().getDisgust());
+                face.setNeutral(responseReconizing.getScores().getNeutral());
 
                 faceAdapterList.add(face);
                 facesAdapter.notifyDataSetChanged();
@@ -317,13 +353,31 @@ public class MainActivity extends AppCompatActivity {
         Face face4 = new Face("12", "sdfds", "sdfdsf", 2);
         Face face5 = new Face("12", "sdfds", "sdfdsf", 2);
         Face face6 = new Face("12", "sdfds", "sdfdsf", 1);*/
+        realm = Realm.getDefaultInstance();
 
+        RealmResults<DatosFace> resultado = realm.where(DatosFace.class).findAll();
+        for (int i = 0; i < resultado.size(); i++)
+        {
+            face = new Face();
+            face.setPotencial(resultado.get(i).getPotencial());
+            face.setId(resultado.get(i).getId());
+            face.setUrl(resultado.get(i).getUrl());
+            face.setHappiness(resultado.get(i).getHappiness());
+            face.setSadness(resultado.get(i).getSadness());
+            face.setAnger(resultado.get(i).getAnger());
+            face.setDisgust(resultado.get(i).getDisgust());
+            face.setNeutral(resultado.get(i).getNeutral());
+            faceAdapterList.add(face);
+        }
+
+        facesAdapter.notifyDataSetChanged();
         facesAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("Perfil activity", "Pulsado el elemento " + recyclerViewFaces.getChildAdapterPosition(v));
                 Face face = faceAdapterList.get(recyclerViewFaces.getChildAdapterPosition(v));
                 Intent intent = new Intent(MainActivity.this, FaceProfileActivity.class);
+                Log.i("Perfil activity", "ID "+face.getId());
                 intent.putExtra("Algo", face.getId());
                 startActivity(intent);
                 finish();
